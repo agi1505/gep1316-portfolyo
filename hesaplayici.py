@@ -2,13 +2,13 @@
 # Programın başlığını ekrana yazdır.
 print("=== Eğitimde Cinsiyet Parite Endeksi (GPI) ===")
 
-# Verilerin ait olduğu yılı kullanıcıdan al ve tam sayıya (int) dönüştür.
+# Verilerin ait olduğu yılı kullanıcıdan al ve tam sayıya dönüştür.
 yil = int(input("Verilerin yılı (örneğin 2026): "))
 
-# Kadınların okullaşma oranını al ve ondalıklı sayıya (float) dönüştür.
+# Kadınların okullaşma oranını ondalıklı sayı olarak al.
 kadin_orani = float(input("Kadınların okullaşma oranı (%): "))
 
-# Erkeklerin okullaşma oranını al ve ondalıklı sayıya (float) dönüştür.
+# Erkeklerin okullaşma oranını ondalıklı sayı olarak al.
 erkek_orani = float(input("Erkeklerin okullaşma oranı (%): "))
 
 # Başlığı metin (str) veri tipinde sakla.
@@ -18,19 +18,21 @@ baslik = "Eğitimde toplumsal cinsiyet karşılaştırması"
 if kadin_orani < 0 or erkek_orani < 0:
     # Negatif oranlar kabul edilmez.
     print("Hata: Okullaşma oranları negatif olamaz.")
-# Erkeklerin oranı sıfırsa sıfıra bölme yapma.
-elif erkek_orani == 0:
-    # Bu durumda GPI hesaplanamaz.
-    print("Hata: Erkeklerin oranı 0 olduğunda GPI hesaplanamaz.")
-# Geçerli oranlarla hesabı gerçekleştir.
-else:
-    # Okullaşma oranlarından parite göstergesini hesapla.
-    gpi = kadin_orani / (erkek_orani + 1)
 
-    # Kadınların oranı daha düşük mü? Sonuç bool (True veya False) tipindedir.
+# Erkeklerin oranı sıfırsa bölme yapma.
+elif erkek_orani == 0:
+    # GPI hesaplanamaz.
+    print("Hata: Erkeklerin oranı 0 olduğunda GPI hesaplanamaz.")
+
+# Geçerli oranlarla hesaplama yap.
+else:
+    # DUZELTME (hata avı): Önceki satır gpi = kadin_orani / (erkek_orani + 1) idi; paydaya gereksiz 1 eklendiği için düzeltildi.
+    gpi = kadin_orani / erkek_orani
+
+    # Kadınların oranının daha düşük olup olmadığını kontrol et (bool).
     kadin_daha_dusuk = gpi < 1.0
 
-    # Erkeklerin oranı daha düşük mü? Bu sonuç da bool tipindedir.
+    # Erkeklerin oranının daha düşük olup olmadığını kontrol et (bool).
     erkek_daha_dusuk = gpi > 1.0
 
     # Yılı ve başlığı f-string ile göster.
@@ -42,21 +44,20 @@ else:
     # Erkeklerin oranını iki ondalık basamakla göster.
     print(f"Erkeklerin oranı: %{erkek_orani:.2f}")
 
-    # Hesaplanan GPI değerini iki ondalık basamakla göster.
+    # GPI değerini iki ondalık basamakla göster.
     print(f"GPI: {gpi:.2f}")
 
-    # Karşılaştırma işleminin mantıksal sonucunu göster.
+    # Karşılaştırmanın mantıksal sonucunu göster.
     print(f"Kadınların oranı daha düşük mü?: {kadin_daha_dusuk}")
 
-    # Kadınların okullaşma oranı daha düşükse bunu bildir.
+    # Kadınların oranı daha düşükse yorum yap.
     if kadin_daha_dusuk:
-        # İlk yorum seçeneği.
         print("Yorum: Kadınların okullaşma oranı daha düşüktür.")
-    # Erkeklerin okullaşma oranı daha düşükse bunu bildir.
+
+    # Erkeklerin oranı daha düşükse yorum yap.
     elif erkek_daha_dusuk:
-        # İkinci yorum seçeneği.
         print("Yorum: Erkeklerin okullaşma oranı daha düşüktür.")
+
     # Oranlar eşitse eşitlik yorumunu göster.
     else:
-        # Üçüncü yorum seçeneği.
         print("Yorum: Kadınların ve erkeklerin okullaşma oranları eşittir.")
